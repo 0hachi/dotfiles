@@ -7,7 +7,7 @@ hc() {
 hc emit_hook reload
 
 xrandr --output HDMI-1 --primary &
-feh --bg-fill $HOME/.specs/lain/wallpaper.png &
+nitrogen --restore &
 eww open-many bar_0 bar_1 &
 
 hc keyunbind --all

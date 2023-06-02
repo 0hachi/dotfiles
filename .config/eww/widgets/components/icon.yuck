@@ -11,10 +11,15 @@
        
         (label
           :text character
-          :class "icon"
+	  :class "icon"
         )
-        
-        text
+      
+      	(label
+          :text text
+
+	  :limit-width 10
+	  :truncate_left true
+	)
       )
     ))
   
