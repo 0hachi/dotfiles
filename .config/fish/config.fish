@@ -1,5 +1,3 @@
-source ~/.config/fish/aliases.fish
-
 # separate fisher from personal
 set fisher_path ~/.config/fish/fisher 
 # disable greeting message
