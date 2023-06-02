@@ -1,0 +1,8 @@
+(defpoll wifi :interval "1m" "scripts/getwifi")
+(defpoll tm :interval "1m" "scripts/gettime")
+(defpoll dt :interval "1m" "scripts/getdate")
+
+(defpoll ram :interval "1s" "scripts/getram")
+(defpoll vol :interval "1s" "scripts/getvol")
+
+(defpoll ws :interval "1ms" "scripts/pollworkspaces")

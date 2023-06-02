@@ -1,0 +1,16 @@
+[code]
+  editor = vim
+
+[user]
+  email = 121581793+0hachi@users.noreply.github.com
+  name = faye
+  signingKey = 574FBF5AA298B035
+
+[init]
+  defaultBranch = main
+
+[alias]
+  logline = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+
+[push]
+  autoSetupRemote = true

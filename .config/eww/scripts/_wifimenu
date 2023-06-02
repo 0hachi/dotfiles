@@ -1,0 +1,13 @@
+#! /usr/bin/env bash
+
+current_network=$(nmcli connection show --active | grep 'wifi|ethernet' | awk '{print $1}')
+
+# TODO:
+# available_networks=$(nmcli device wifi list | awk '{print $1}')
+
+# TODO: Shouldn't use Zenity either, but rather `eww`
+# zenity --info \
+#        --title "Wi-Fi Networks" \
+#        --text "Current Network: $current_network\n\nAvailable Networks:\n$available_networks"
+
+echo "$current_network"

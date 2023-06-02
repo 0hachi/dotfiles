@@ -1,0 +1,51 @@
+#! /usr/bin/env bash
+
+get_workspace_names() {
+  wmctrl -d \
+    | awk '{ print $1 " " $2 " " $9 }' \
+    | grep -v NSP 
+}
+
+
+to_yuck_workspaces() {
+  buffered=""
+
+  # Get the ID of the currently focused workspace
+  active_workspace="$(wmctrl -d | awk '/\*/ {print $1}')"
+
+  # Loop over all workspaces
+  get_workspace_names | while read -r id active name; do
+    name="${name#*_}"
+    
+    if [ "$id" == "$active_workspace" ]; then
+      active_class="active"
+      button_name="⬤"  # Full circle for active workspace
+      button_class="occupied"
+      focused_and_occupied=1  # Keep track of whether this workspace is both occupied and focused
+    elif wmctrl -l | grep --regexp '.*\s\+'"$id"'\s\+.*' >/dev/null; then
+      button_class="occupied"
+      active_class="inactive"
+      button_name=""  # Empty circle for occupied workspace
+      focused_and_occupied=0
+    else
+      button_class="empty"
+      active_class=""
+      button_name=""  # Empty circle for empty workspace
+      focused_and_occupied=0
+    fi
+
+    # If this workspace is both occupied and focused, use a full circle
+    if [ "$focused_and_occupied" == 1 ]; then
+      button_name=""
+      button_class+=" $active_class"
+    fi
+
+    buffered+="(button :class \"$button_class $active_class\" :onclick \"wmctrl -s $id\" \"$button_name\")"
+    echo -n "$buffered"
+    buffered=""
+  done
+}
+
+box_attrs=':orientation "h" :class "workspaces" :spacing 8'
+
+echo "(box $box_attrs $(to_yuck_workspaces) (separator))"

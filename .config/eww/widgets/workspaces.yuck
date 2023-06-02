@@ -1,0 +1,4 @@
+(include "widgets/separator.yuck")
+
+(defwidget workspaces []
+  (literal :content ws))

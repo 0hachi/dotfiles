@@ -1,0 +1,3 @@
+#! /usr/bin/env bash
+
+printf "%.0f%%\n" "$(pactl list sinks | awk '/Volume: front/{print $5}' | tr -d '%')"

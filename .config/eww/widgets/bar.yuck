@@ -1,0 +1,34 @@
+(include "polling.yuck")
+(include "widgets/tray.yuck")
+(include "widgets/time.yuck")
+(include "widgets/date.yuck")
+(include "widgets/spacer.yuck")
+(include "widgets/separator.yuck")
+(include "widgets/workspaces.yuck")
+
+(include "widgets/components/icon.yuck")
+
+(defwidget bar []
+  (box :class "bar"
+    :orientation "h"
+    
+    :spacing 0
+    :space-evenly false
+    
+    
+    (box
+      :space-evenly false
+
+      (workspaces))
+    (box 
+      :hexpand true
+   
+      (spacer)
+    )
+    (box
+      :space-evenly false
+            
+      (tray)
+      (date)
+      (time))
+  ))

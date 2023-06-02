@@ -1,0 +1,9 @@
+(defwidget time []
+    (box :class "time"
+      :orientation "h"
+      :space-evenly false
+      :spacing 0
+      
+      (separator)
+      (icon :character "" :text tm :onclick "")
+    ))

@@ -1,0 +1,43 @@
+# This file contains fish universal variable definitions.
+# VERSION: 3.0
+SETUVAR --export ABBR_TIPS_PROMPT:\x5cn\U0001f4a1\x20\x5ce\x5b1m\x7b\x7b\x20\x2eabbr\x20\x7d\x7d\x5ce\x5b0m\x20\x3d\x3e\x20\x7b\x7b\x20\x2ecmd\x20\x7d\x7d
+SETUVAR --export ABBR_TIPS_REGEXES:\x28\x5e\x28\x5cw\x2b\x5cs\x2b\x29\x2b\x28\x2d\x7b1\x2c2\x7d\x29\x5cw\x2b\x29\x28\x5cs\x5cS\x2b\x29\x1e\x28\x5e\x28\x5cs\x3f\x28\x5cw\x2d\x3f\x29\x2b\x29\x7b3\x7d\x29\x2e\x2a\x1e\x28\x5e\x28\x5cs\x3f\x28\x5cw\x2d\x3f\x29\x2b\x29\x7b2\x7d\x29\x2e\x2a\x1e\x28\x5e\x28\x5cs\x3f\x28\x5cw\x2d\x3f\x29\x2b\x29\x7b1\x7d\x29\x2e\x2a
+SETUVAR --export __ABBR_TIPS_KEYS:a__c\x1ea__cat\x1ea__df\x1ea__du\x1ea__free\x1ea__grep\x1ea__list_wifi\x1ea__ls\x1ea__lsa\x1ea__mkdir\x1ea__mv\x1ea__ping\x1ea__rm\x1ea__wget
+SETUVAR --export __ABBR_TIPS_VALUES:clear\x1ebat\x1edf\x20\x2dh\x1edu\x20\x2dh\x1efree\x20\x2dm\x1erg\x20\x2d\x2dcolor\x20always\x1enmcii\x20dev\x20wifi\x20rescan\x20\x26\x26\x20nmcli\x20dev\x20wifi\x20list\x1eexa\x20\x2dl\x20\x2d\x2dicons\x20\x2d\x2dcolour\x20always\x20\x2d\x2dgroup\x2ddirectories\x2dfirst\x1eexa\x20\x2dla\x20\x2d\x2dicons\x20\x2d\x2dcolour\x20always\x20\x2d\x2dgroup\x2ddirectories\x2dfirst\x1emkdir\x20\x2dpv\x1emv\x20\x2di\x1eping\x20\x2dc\x205\x1erm\x20\x2di\x1ewget\x20\x2dc
+SETUVAR __fish_initialized:3400
+SETUVAR _fisher_acomagu_2F_fish_2D_async_2D_prompt_files:\x7e/\x2econfig/fish/fisher/conf\x2ed/__async_prompt\x2efish
+SETUVAR _fisher_gazorby_2F_fish_2D_abbreviation_2D_tips_files:\x7e/\x2econfig/fish/fisher/functions/__abbr_tips_bind_newline\x2efish\x1e\x7e/\x2econfig/fish/fisher/functions/__abbr_tips_bind_space\x2efish\x1e\x7e/\x2econfig/fish/fisher/functions/__abbr_tips_clean\x2efish\x1e\x7e/\x2econfig/fish/fisher/functions/__abbr_tips_init\x2efish\x1e\x7e/\x2econfig/fish/fisher/conf\x2ed/abbr_tips\x2efish
+SETUVAR _fisher_jorgebucaran_2F_fisher_files:\x7e/\x2econfig/fish/fisher/functions/fisher\x2efish\x1e\x7e/\x2econfig/fish/fisher/completions/fisher\x2efish
+SETUVAR _fisher_laughedelic_2F_pisces_files:\x7e/\x2econfig/fish/fisher/functions/_pisces_append\x2efish\x1e\x7e/\x2econfig/fish/fisher/functions/_pisces_backspace\x2efish\x1e\x7e/\x2econfig/fish/fisher/functions/_pisces_bind_pair\x2efish\x1e\x7e/\x2econfig/fish/fisher/functions/_pisces_complete\x2efish\x1e\x7e/\x2econfig/fish/fisher/functions/_pisces_insert_identical\x2efish\x1e\x7e/\x2econfig/fish/fisher/functions/_pisces_insert_left\x2efish\x1e\x7e/\x2econfig/fish/fisher/functions/_pisces_insert_right\x2efish\x1e\x7e/\x2econfig/fish/fisher/functions/_pisces_jump\x2efish\x1e\x7e/\x2econfig/fish/fisher/functions/_pisces_lookup\x2efish\x1e\x7e/\x2econfig/fish/fisher/functions/_pisces_remove\x2efish\x1e\x7e/\x2econfig/fish/fisher/functions/_pisces_should_insert\x2efish\x1e\x7e/\x2econfig/fish/fisher/functions/_pisces_skip\x2efish\x1e\x7e/\x2econfig/fish/fisher/conf\x2ed/pisces\x2efish
+SETUVAR _fisher_plugins:jorgebucaran/fisher\x1elaughedelic/pisces\x1egazorby/fish\x2dabbreviation\x2dtips\x1eacomagu/fish\x2dasync\x2dprompt
+SETUVAR _fisher_upgraded_to_4_4:\x1d
+SETUVAR fish_color_autosuggestion:555\x1ebrblack
+SETUVAR fish_color_cancel:\x2dr
+SETUVAR fish_color_command:blue
+SETUVAR fish_color_comment:red
+SETUVAR fish_color_cwd:green
+SETUVAR fish_color_cwd_root:red
+SETUVAR fish_color_end:green
+SETUVAR fish_color_error:brred
+SETUVAR fish_color_escape:brcyan
+SETUVAR fish_color_history_current:\x2d\x2dbold
+SETUVAR fish_color_host:normal
+SETUVAR fish_color_host_remote:yellow
+SETUVAR fish_color_normal:normal
+SETUVAR fish_color_operator:brcyan
+SETUVAR fish_color_param:cyan
+SETUVAR fish_color_quote:yellow
+SETUVAR fish_color_redirection:cyan\x1e\x2d\x2dbold
+SETUVAR fish_color_search_match:bryellow\x1e\x2d\x2dbackground\x3dbrblack
+SETUVAR fish_color_selection:white\x1e\x2d\x2dbold\x1e\x2d\x2dbackground\x3dbrblack
+SETUVAR fish_color_status:red
+SETUVAR fish_color_user:brgreen
+SETUVAR fish_color_valid_path:\x2d\x2dunderline
+SETUVAR fish_key_bindings:fish_default_key_bindings
+SETUVAR fish_pager_color_completion:normal
+SETUVAR fish_pager_color_description:B3A06D\x1eyellow\x1e\x2di
+SETUVAR fish_pager_color_prefix:normal\x1e\x2d\x2dbold\x1e\x2d\x2dunderline
+SETUVAR fish_pager_color_progress:brwhite\x1e\x2d\x2dbackground\x3dcyan
+SETUVAR fish_pager_color_selected_background:\x2dr
+SETUVAR fisher_path:/home/whore/\x2econfig/fish/fisher
+SETUVAR pisces_pairs:\x28\x2c\x29\x1e\x5b\x2c\x5d\x1e\x7b\x2c\x7d\x1e\x22\x2c\x22\x1e\x27\x2c\x27

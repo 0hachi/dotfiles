@@ -1,0 +1,20 @@
+(defwidget icon [character text onclick]
+    (button
+      :onclick onclick
+  
+      (box
+        :orientation "h"
+        :spacing 8
+        :space-evenly false
+        :halign "center"
+        :valign "center"
+       
+        (label
+          :text character
+          :class "icon"
+        )
+        
+        text
+      )
+    ))
+  

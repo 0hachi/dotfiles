@@ -1,0 +1,11 @@
+(defwidget tray []
+  (box :class "tray"
+    :orientation "h"
+    :space-evenly false
+    :spacing 16
+    
+    (separator)
+    (icon :character "󰍛" :text ram :onclick "alacritty -e bpytop &")
+    (icon :character "" :text vol :onclick "pavucontrol &")
+    (icon :character "" :text wifi :onclick "")
+  ))
