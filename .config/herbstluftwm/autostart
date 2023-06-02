@@ -124,6 +124,7 @@ hc attr theme.normal.outer_color    '#bc667a'
 
 # title
 hc attr theme.title_font    'Mononoki Nerd Font Mono:size=10'
+hc attr theme.title_color   '#f5e3bb'
 hc attr theme.title_align   center
 hc attr theme.title_when    always
 hc attr theme.title_height  24
