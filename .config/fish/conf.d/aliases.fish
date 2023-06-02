@@ -6,7 +6,7 @@ alias free='free -m'
 alias wget='wget -c'
 alias ping='ping -c 5'
 alias mkdir='mkdir -pv'
-alias list_wifi='nmcii dev wifi rescan && nmcli dev wifi list'
+alias list_wifi='nmcli dev wifi rescan && nmcli dev wifi list'
 
 
 # safety
