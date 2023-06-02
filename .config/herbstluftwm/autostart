@@ -6,8 +6,9 @@ hc() {
 
 hc emit_hook reload
 
+xrandr --output HDMI-1 --primary &
 feh --bg-fill $HOME/.specs/lain/wallpaper.png &
-eww open bar &
+eww open-many bar_0 bar_1 &
 
 hc keyunbind --all
 
@@ -70,6 +71,7 @@ hc keybind $Mod-Control-Right   resize right +$resizestep
 tag_names=( {1..9} )
 tag_keys=( {1..9} 0 )
 
+
 hc rename default "${tag_names[0]}" || true
 for i in "${!tag_names[@]}" ; do
     hc add "${tag_names[$i]}"
@@ -83,6 +85,9 @@ done
 # cycle through tags
 hc keybind $Mod-period use_index +1 --skip-visible
 hc keybind $Mod-comma  use_index -1 --skip-visible
+
+# multi monitors
+hc detect_monitors
 
 # layouting
 hc keybind $Mod-r remove
@@ -116,6 +121,9 @@ hc keybind $Mod-Shift-Tab   cycle_all -1
 hc keybind $Mod-c           cycle
 hc keybind $Mod-i           jumpto urgent
 
+hc attr theme.tiling.reset 1
+hc attr theme.floating.reset 1
+
 # borders
 hc attr theme.border_width          2
 hc attr theme.outer_width           40
@@ -133,6 +141,7 @@ hc attr theme.title_depth   14
 # settings
 hc set window_gap           12
 hc set frame_border_width   0
+hc set frame_bg_transparent on
 hc set frame_gap            0
 hc set focus_follows_mouse  1
 
@@ -142,6 +151,10 @@ hc unrule -F
 hc rule focus=on # normally focus new clients
 hc rule floatplacement=smart
 
+
+hc set focus_crosses_monitor_boundaries 1
+hc set swap_monitors_to_get_tag=off
+
 hc rule class~"(alacritty-float)" focus=on floating=on
 
 hc rule windowtype~'_NET_WM_WINDOW_TYPE_(DIALOG|UTILITY|SPLASH)' floating=on
@@ -149,6 +162,7 @@ hc rule windowtype='_NET_WM_WINDOW_TYPE_DIALOG' focus=on
 hc rule windowtype~'_NET_WM_WINDOW_TYPE_(NOTIFICATION|DOCK|DESKTOP)' manage=off
 
 hc rule fixedsize floating=on
+
 
 hc set layout grid
 hc set tree_style '╾│ ├└╼─┐'
