@@ -24,8 +24,7 @@ hc keybind $Mod-q close
 hc keybind $Mod-Return spawn "alacritty"
 hc keybind $Mod-Shift-Return spawn "alacritty" --class "alacritty-float"
 
-dmenu="dmenu -p 'run: '"
-hc keybind $Mod-d spawn "j4-dmenu-desktop --dmenu=$dmenu"
+hc keybind $Mod-d spawn "dmenu_run_apps"
 hc keybind $Mod-e spawn "dmenu_emoji_menu"
 
 # moving focus
