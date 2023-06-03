@@ -5,4 +5,5 @@
 (defpoll ram :interval "1s" "scripts/getram")
 (defpoll vol :interval "1s" "scripts/getvol")
 
-(defpoll ws :interval "1ms" "scripts/pollworkspaces")
+(defpoll ws1 :interval "1ms" "scripts/pollworkspaces 1")
+(defpoll ws2 :interval "1ms" "scripts/pollworkspaces 2")

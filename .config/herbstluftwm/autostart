@@ -24,7 +24,8 @@ hc keybind $Mod-q close
 hc keybind $Mod-Return spawn "alacritty"
 hc keybind $Mod-Shift-Return spawn "alacritty" --class "alacritty-float"
 
-hc keybind $Mod-d spawn "dmenu_run_apps"
+dmenu="dmenu -p 'run: '"
+hc keybind $Mod-d spawn "j4-dmenu-desktop --dmenu=$dmenu"
 hc keybind $Mod-e spawn "dmenu_emoji_menu"
 
 # moving focus
@@ -67,24 +68,58 @@ hc keybind $Mod-Control-Down    resize down +$resizestep
 hc keybind $Mod-Control-Up      resize up +$resizestep
 hc keybind $Mod-Control-Right   resize right +$resizestep
 
+hc attr settings.default_frame_layout grid
+
 # tags
-tag_names=( {1..9} )
+mon1_names=( 1_{1..9} ) # tag names for monitor 1
+mon2_names=( 2_{1..9} ) # tag names for monitor 2
 tag_keys=( {1..9} 0 )
 
+hc rename default "${mon1_names[0]}" || true
+for tag in "${mon1_names[@]}" "${mon2_names[@]}" ; do
+    hc try silent add "$tag"
+done
 
-hc rename default "${tag_names[0]}" || true
-for i in "${!tag_names[@]}" ; do
-    hc add "${tag_names[$i]}"
+for i in ${!tag_keys[@]} ; do
     key="${tag_keys[$i]}"
-    if [ -n "$key" ] ; then
-        hc keybind "$Mod-$key" use_index "$i"
-        hc keybind "$Mod-Shift-$key" move_index "$i"
-    fi
+    # the keybinding works as follows: the or executes the commands separated by
+    # CASE and stops executing them after the first of those succeeds.
+    # the first command is: check that we are on monitor 3 and can switch to tag "${mon1_names[$i]}"
+    # if only one of these two steps fail, try the second one (and so one).
+    # The setup for two monitors is as follows:
+    hc keybind "$Mod-$key" \
+        or CASE and . compare monitors.focus.index = 0 . use "${mon1_names[$i]}" \
+           CASE and . compare monitors.focus.index = 1 . use "${mon2_names[$i]}"
+    hc keybind "$Mod-Shift-$key" \
+        or CASE and . compare monitors.focus.index = 0 . move "${mon1_names[$i]}" \
+           CASE and . compare monitors.focus.index = 1 . move "${mon2_names[$i]}"
 done
 
 # cycle through tags
-hc keybind $Mod-period use_index +1 --skip-visible
-hc keybind $Mod-comma  use_index -1 --skip-visible
+# add additional information in order to cycle only through a monitor's tags
+# and not through all tags
+define-tag-cycle() {
+    local n=$#
+    local tags=( "$@" )
+    for i in "${!tags[@]}" ; do
+        local t="${tags[$i]}"
+        hc chain , new_attr string tags.by-name."$t".my_previous_tag \
+                 , set_attr tags.by-name."$t".my_previous_tag "${tags[$(((i - 1 + n) % n))]}" \
+                 , new_attr string tags.by-name."$t".my_next_tag \
+                 , set_attr tags.by-name."$t".my_next_tag "${tags[$(((i + 1) % n))]}"
+    done
+}
+
+define-tag-cycle "${mon1_names[@]}"
+define-tag-cycle "${mon2_names[@]}"
+
+# cycle through tags
+# check whether the current tag as a custom "next tag" configured
+# if yes, jump to that one, otherwise fall back to ordinary use_index +1
+hc keybind $Mod-period or , substitute NEXT tags.focus.my_next_tag use NEXT  \
+                          , use_index +1 --skip-visible
+hc keybind $Mod-comma  or , substitute PREV tags.focus.my_previous_tag use PREV  \
+                          , use_index +1 --skip-visible
 
 # multi monitors
 hc detect_monitors
@@ -162,9 +197,6 @@ hc rule windowtype='_NET_WM_WINDOW_TYPE_DIALOG' focus=on
 hc rule windowtype~'_NET_WM_WINDOW_TYPE_(NOTIFICATION|DOCK|DESKTOP)' manage=off
 
 hc rule fixedsize floating=on
-
-
-hc set layout grid
 hc set tree_style '╾│ ├└╼─┐'
 
 hc unlock

@@ -1,19 +1,20 @@
 #! /usr/bin/env bash
 
+pattern="$1"
+
 get_workspace_names() {
   wmctrl -d \
-    | awk '{ print $1 " " $2 " " $9 }' \
-    | grep -v NSP 
+    | awk -v pattern="$pattern" '$9 ~ "^" pattern "_" { print $1 " " $2 " " $9 }' \
+    | grep -v NSP
 }
-
 
 to_yuck_workspaces() {
   buffered=""
 
-  # Get the ID of the currently focused workspace
+  # get the ID of the currently focused workspace
   active_workspace="$(wmctrl -d | awk '/\*/ {print $1}')"
 
-  # Loop over all workspaces
+  # loop over all workspaces
   get_workspace_names | while read -r id active name; do
     name="${name#*_}"
     
@@ -34,7 +35,7 @@ to_yuck_workspaces() {
       focused_and_occupied=0
     fi
 
-    # If this workspace is both occupied and focused, use a full circle
+    # if this workspace is both occupied and focused, use a full circle
     if [ "$focused_and_occupied" == 1 ]; then
       button_name=""
       button_class+=" $active_class"

@@ -4,11 +4,10 @@
 (include "widgets/date.yuck")
 (include "widgets/spacer.yuck")
 (include "widgets/separator.yuck")
-(include "widgets/workspaces.yuck")
 
 (include "widgets/components/icon.yuck")
 
-(defwidget bar []
+(defwidget bar [monitor]
   (box :class "bar"
     :orientation "h"
     
@@ -19,7 +18,9 @@
     (box
       :space-evenly false
 
-      (workspaces))
+      (literal :content ws1 :visible {monitor == 1})
+      (literal :content ws2 :visible {monitor == 2})
+    )
     (box 
       :hexpand true
    
