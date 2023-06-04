@@ -50,11 +50,11 @@ debug "installing rust nightly"
 rustup install nightly >/dev/null 2>&1
 
 debug "installing paru"
-git clone https://aur.archlinux.org/paru.git /tmp/paru >/dev/null 2>&1
+git clone https://aur.archlinux.org/paru.git ./paru >/dev/null 2>&1
 
 debug "building paru"
-(cd /tmp/paru && makepkg -si --noconfirm) >/dev/null 2>&1
-rm -rf /tmp/paru >/dev/null 2>&1
+(cd ./paru && makepkg -si --noconfirm) >/dev/null 2>&1
+rm -rf ./paru >/dev/null 2>&1
 
 success "paru successfully installed"
 
