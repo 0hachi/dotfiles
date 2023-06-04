@@ -1,5 +1,6 @@
 \.git
 \.gitignore
+\suckless
 
 ^/README.*
 ^/LICENSE.*
