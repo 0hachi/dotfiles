@@ -43,6 +43,11 @@ sudo pacman -Sy --noconfirm >/dev/null 2>&1
 installpkg "git"
 
 # aur helper
+debug "installing rustup"
+installpkg "rustup"
+
+debug "installing rust nightly"
+rustup install nightly
 
 debug "installing paru"
 git clone https://aur.archlinux.org/paru.git /tmp/paru >/dev/null 2>&1
@@ -72,7 +77,7 @@ installpkg "exa" "bat" "ripgrep" "devour" "nsxiv" "stow" "shotgun" "xclip"
 
 ## various non-hard dependencies
 debug "installing dependencies"
-installpkg "wmctrl" "pywal" "man-db"  "inotify-tools"
+installpkg "wmctrl" "pywal" "man-db" "inotify-tools"
 
 # post-install
 debug "setting fish as default shell"
