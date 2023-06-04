@@ -1,44 +1,87 @@
 #! /usr/bin/env sh
 
-# this script is meant to be run after a minimal 
+# this script is meant to be run after a minimal
 # x server installation as done by archinstall.
 
-# Git
+_log() { printf '%b\033[1m[setup]\033[0m %s%b\n' "$2" "$1" '\033[0m' >&2; }
 
-__installp() {
-	pacman --noconfirm --needed -S "$1" >/dev/null 2>&1
+error() {
+	_log "$1" '\033[31m'
+	exit 1
+}
+debug() { _log "$1" '\033[36m'; }
+success() { _log "$1" '\033[32m'; }
+
+installpkg() {
+	# use `paru` if found.
+	if command -v paru >/dev/null 2>&1; then
+		package_manager="paru"
+	else
+		package_manager="pacman"
+	fi
+
+	for package in "$@"; do
+		if [ "$package_manager" = "paru" ]; then
+			paru --noconfirm --needed -S "$package" >/dev/null 2>&1
+		else
+			sudo pacman --noconfirm --needed -S "$package" >/dev/null 2>&1
+		fi
+
+		if [ $? -eq 0 ]; then
+			success "package '$package' successfully installed with $package_manager"
+		else
+			error "can't install package '$package' with '$package_manager'"
+		fi
+	done
 }
 
-# pacman --noconfirm --needed -S git >/dev/null 2>&1 
+# basics
 
-# Install paru
+debug "updating packages database"
+sudo pacman -Sy --noconfirm >/dev/null 2>&1
 
-# ...
+installpkg "git"
 
-# Install fish
+# aur helper
 
-# install fish and
-# set it as default
-paru -Sy fish
-sudo chsh -s /usr/bin/fish
+debug "installing paru"
+git clone https://aur.archlinux.org/paru.git /tmp/paru >/dev/null 2>&1
 
-paru -S bat \			# better cat
-	exa \			# better ls
-	ripgrep \		# better grep
-	eww \			# widget library
-	herbstluftwm \		# window manager
-	ly \			# display manager
-	neovim \		# editor
-	stow \			# dotfiles manager
-	nitrogen \		# wallpaper setter
-	alacritty \		# terminal
-	ungooled-chromium-bin \ # browser
-	pavucontrol \		#  
-	ttf-mononoki-nerd	# font
+debug "building paru"
+(cd /tmp/paru && makepkg -si --noconfirm) >/dev/null 2>&1
+rm -rf /tmp/paru >/dev/null 2>&1
 
+success "paru successfully installed"
+
+# install needed packages
+## system
+debug "installing system apps"
+installpkg "fish" "herbstluftwm" "eww" "paru" "ly"
+
+## apps
+debug "installing user apps"
+installpkg "neovim" "alacritty" "pavucontrol" "nitrogen" "gpick" "bitwarden"
+
+## fonts
+debug "installing fonts"
+installpkg "ttf-mononoki-nerd" "noto-fonts-main" "noto-fonts-cjk" "noto-fonts-emoji-apple" # others are in .local/share/fonts
+
+## cli utils
+debug "installing cli utils"
+installpkg "exa" "bat" "ripgrep" "devour" "nsxiv" "stow" "shotgun" "xclip"
+
+## various non-hard dependencies
+debug "installing dependencies"
+installpkg "wmctrl" "pywal" "man-db"  "inotify-tools"
+
+# post-install
+debug "setting fish as default shell"
+chsh -s /usr/bin/fish
+
+debug "enabling display manager service"
 sudo systemctl enable ly.service
 
-# Add my forks (dwm, etc.)
+# # Add my forks (dwm, etc.)
 
 stow .
 
