@@ -6,6 +6,12 @@ hc() {
 
 hc emit_hook reload
 
+hc attr settings.default_frame_layout grid
+hc substitute ALGO settings.default_frame_layout \
+    foreach T tags.by-name. \
+    sprintf ATTR '%c.tiling.root.algorithm' T \
+    set_attr ATTR ALGO
+
 xrandr --output HDMI-1 --primary &
 nitrogen --restore &
 eww open-many bar_0 bar_1 &
@@ -22,6 +28,7 @@ hc keybind $Mod-q close
 
 # apps
 hc keybind $Mod-Return spawn "alacritty"
+hc keybind $Mod-b spawn "librewolf"
 hc keybind $Mod-Shift-Return spawn "alacritty" --class "alacritty-float"
 
 hc keybind $Mod-d spawn "dmenu_run_apps"
@@ -67,7 +74,6 @@ hc keybind $Mod-Control-Down    resize down +$resizestep
 hc keybind $Mod-Control-Up      resize up +$resizestep
 hc keybind $Mod-Control-Right   resize right +$resizestep
 
-hc attr settings.default_frame_layout grid
 
 # tags
 mon1_names=( 1_{1..9} ) # tag names for monitor 1
