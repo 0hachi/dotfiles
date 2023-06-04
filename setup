@@ -47,7 +47,7 @@ debug "installing rustup"
 installpkg "rustup"
 
 debug "installing rust nightly"
-rustup install nightly >/dev/null 2>&1
+rustup default nightly >/dev/null 2>&1
 
 debug "installing paru"
 git clone https://aur.archlinux.org/paru.git ./paru >/dev/null 2>&1
@@ -59,10 +59,6 @@ rm -rf ./paru >/dev/null 2>&1
 success "paru successfully installed"
 
 # install needed packages
-## system
-debug "installing system apps"
-installpkg "fish" "herbstluftwm" "eww" "paru" "ly"
-
 ## apps
 debug "installing user apps"
 installpkg "neovim" "alacritty" "pavucontrol" "nitrogen" "gpick" "bitwarden"
@@ -79,14 +75,23 @@ installpkg "exa" "bat" "ripgrep" "devour" "nsxiv" "stow" "shotgun" "xclip"
 debug "installing dependencies"
 installpkg "wmctrl" "pywal" "man-db" "inotify-tools"
 
+## system
+debug "installing system apps"
+installpkg "fish" "herbstluftwm" "eww" "paru" "ly"
+
+## forks that require building
+debug "installing suckless"
+git clone https://github.com/0hachi/suckless.git >/dev/null 2>&1
+
+success "dmenu installed"
+(cd suckless && API_ENV_KEY="" sudo make install) >/dev/null 2>&1
+
 # post-install
 debug "setting fish as default shell"
-chsh -s /usr/bin/fish
+chsh -s /usr/bin/fish 2>&1
 
 debug "enabling display manager service"
-sudo systemctl enable ly.service
-
-# # Add my forks (dwm, etc.)
+sudo systemctl enable ly.service 2>&1
 
 stow .
 
