@@ -47,7 +47,7 @@ debug "installing rustup"
 installpkg "rustup"
 
 debug "installing rust nightly"
-rustup install nightly
+rustup install nightly >/dev/null 2>&1
 
 debug "installing paru"
 git clone https://aur.archlinux.org/paru.git /tmp/paru >/dev/null 2>&1
