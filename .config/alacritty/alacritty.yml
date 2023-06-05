@@ -9,15 +9,15 @@ window:
 
 font:
   normal:
-    family: lucy tewi
+    family: spectrum berry
     style: Regular
 
   bold:
-    family: lucy tewi
+    family: spectrum berry
     style: Bold
     
   italic:
-    family: lucy tewi
+    family: spectrum berry
     style: Italic
 
 colors:
