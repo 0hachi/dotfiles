@@ -1,6 +1,6 @@
 \.git
 \.gitignore
-\suckless
+\.manual
 
 ^/README.*
 ^/LICENSE.*
