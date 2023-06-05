@@ -170,16 +170,8 @@ hc attr theme.outer_width           40
 hc attr theme.active.outer_color    '#d17288'
 hc attr theme.normal.outer_color    '#bc667a'
 
-# title
-hc attr theme.title_font    'Mononoki Nerd Font Mono:size=10'
-hc attr theme.title_color   '#f5e3bb'
-hc attr theme.title_align   center
-hc attr theme.title_when    always
-hc attr theme.title_height  24
-hc attr theme.title_depth   14
-
 # settings
-hc set window_gap           12
+hc set window_gap           20
 hc set frame_border_width   0
 hc set frame_bg_transparent on
 hc set frame_gap            0

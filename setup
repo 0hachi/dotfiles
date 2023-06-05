@@ -65,7 +65,7 @@ installpkg "neovim" "alacritty" "pavucontrol" "nitrogen" "gpick" "bitwarden"
 
 ## fonts
 debug "installing fonts"
-installpkg "ttf-mononoki-nerd" "noto-fonts-main" "noto-fonts-cjk" "noto-fonts-emoji-apple" # others are in .local/share/fonts
+installpkg "bdf-tewi-git" "wqy-bitmapfont" "noto-fonts-emoji-apple" # others are in .local/share/fonts
 
 ## cli utils
 debug "installing cli utils"
@@ -84,7 +84,8 @@ debug "installing suckless"
 git clone https://github.com/0hachi/suckless.git >/dev/null 2>&1
 
 success "dmenu installed"
-(cd suckless && API_ENV_KEY="" sudo make install) >/dev/null 2>&1
+(cd suckless/dmenu && sudo make install) >/dev/null 2>&1
+rm -rf ./suckless >/dev/null 2>&1
 
 # post-install
 
@@ -93,5 +94,9 @@ sudo systemctl enable ly.service >/dev/null 2>&1
 
 stow .
 
-# curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish
+
+sudo chsh -s /usr/bin/fish
+fish
+
+curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | source
 fisher update

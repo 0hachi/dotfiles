@@ -6,19 +6,19 @@ window:
   padding:
     x: 16
     y: 16
-  opacity: 1
-  font:
-    normal:
-      family: Mononoki Nerd Font Mono
-      style: Regular
 
-    bold:
-      family: Mononoki Nerd Font Mono
-      style: Bold
+font:
+  normal:
+    family: lucy tewi
+    style: Regular
 
-    italic:
-      family: Mononoki Nerd Font Mono
-      style: Italic
+  bold:
+    family: lucy tewi
+    style: Bold
+    
+  italic:
+    family: lucy tewi
+    style: Italic
 
 colors:
   primary:

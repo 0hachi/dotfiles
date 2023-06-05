@@ -14,8 +14,8 @@ alias rm='rm -i'
 alias mv='mv -i'
 
 # ls → exa
-alias ls='exa -l --icons --colour always --group-directories-first'
-alias lsa='exa -la --icons --colour always --group-directories-first'
+alias ls='exa -l --colour always --group-directories-first'
+alias lsa='exa -la --colour always --group-directories-first'
 
 # cat → bat
 alias cat='bat'
