@@ -1,0 +1,119 @@
+/* tabs*/
+
+#titlebar,
+#tabbrowser-tabs {
+	--tab-min-height: 18px !important;
+  --tab-block-margin: 0 !important;
+  
+  background-color: #BC667A !important;
+}
+
+#titlebar {
+  appearance: none !important;
+}
+
+.titlebar-buttonbox-container,
+.tab-label-container{
+  max-height: 23px !important;
+}
+
+.tab-background {
+	border-radius: 0px !important;
+}
+
+.tab-icon-image {
+  width: 12px !important;
+  height: 12px !important;
+  
+  display: none !important;
+  /* comment for icons */
+}
+
+.tabbrowser-tab {
+  font-family: 'lucy tewi' !important;
+  font-size: 12px !important;
+  
+  padding: 0 !important;
+  
+  background-color: #BC667A !important;
+}
+ 
+.tab-background[selected="true"] {
+  background-color: #D17288 !important;
+  background-image: none !important;
+}
+
+/* remove bookmarks */
+#PersonalToolbar {
+  display: none !important;
+}
+
+/* search stuff */
+#urlbar-results,
+#urlbar-input,
+#userContext-label {
+  font-family: 'lucy tewi' !important;
+  font-size: 12px !important;
+}
+
+#nav-bar,
+#nav-bar-customization-target {
+  height: 18px !important;
+  background-color: #fff !important;
+}
+
+
+#urlbar-container,
+#urlbar-input-container, {
+  height: 18px !important;
+  background-color: #D17288 !important;
+}
+
+#customizableui-special-spring1,
+#customizableui-special-spring2{
+  display: none !important;;
+}
+
+#urlbar-container,
+#search-container {
+  --urlbar-margin-inline: 0 !important;
+  
+}
+
+#urlbar-background {
+  background-color: #D17288 !important;
+}
+
+/* byebye buttons */
+
+#alltabs-button,
+#tabs-newtab-button,
+#forward-button,
+#back-button,
+#reload-button,
+#identity-icon-box,
+#tracking-protection-icon-container,
+#downloads-button,
+#stop-reload-button,
+#identity-box,
+#urlbar-search-button,
+#remote-control-box,
+.tab-close-button {
+  display: none !important;
+}
+
+#PanelUI-menu-button,
+#unified-extensions-button,
+#star-button {
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+#PanelUI-menu-button,
+#unified-extensions-button {
+  background-color: #D17288 !important;
+}
+
+#unified-extensions-button > * {
+  background-color: #D17288 !important;  
+}
