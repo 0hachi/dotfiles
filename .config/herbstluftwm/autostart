@@ -6,15 +6,13 @@ hc() {
 
 hc emit_hook reload
 
-hc attr settings.default_frame_layout grid
 hc substitute ALGO settings.default_frame_layout \
     foreach T tags.by-name. \
     sprintf ATTR '%c.tiling.root.algorithm' T \
     set_attr ATTR ALGO
 
-xrandr --output HDMI-1 --primary &
-nitrogen --restore &
-eww open-many bar_0 bar_1 &
+xsetroot -solid "#191919" &
+~/.config/succade/run.sh &
 
 hc keyunbind --all
 
@@ -33,6 +31,8 @@ hc keybind $Mod-Shift-Return spawn "alacritty" --class "alacritty-float"
 
 hc keybind $Mod-d spawn "dmenu_run_apps"
 hc keybind $Mod-e spawn "dmenu_emoji_menu"
+
+hc keybind Print spawn "$HOME/.local/share/bin/screenshot"
 
 # moving focus
 hc keybind $Mod-Left  focus left
@@ -76,9 +76,10 @@ hc keybind $Mod-Control-Right   resize right +$resizestep
 
 
 # tags
-mon1_names=( 1_{1..9} ) # tag names for monitor 1
-mon2_names=( 2_{1..9} ) # tag names for monitor 2
-tag_keys=( {1..9} 0 )
+mon1_names=( "0_www" "0_dev" "0_img" "0_misc" )
+mon2_names=( "1_www" "1_dev" "1_img" "1_misc" )
+tag_keys=( {1..4})
+
 
 hc rename default "${mon1_names[0]}" || true
 for tag in "${mon1_names[@]}" "${mon2_names[@]}" ; do
@@ -132,10 +133,8 @@ hc detect_monitors
 # layouting
 hc keybind $Mod-r remove
 
-hc keybind $Mod-s floating  toggle
+hc keybind $Mod-s set_attr clients.focus.floating toggle
 hc keybind $Mod-f fullscreen toggle
-
-hc keybind $Mod-Shift-f set_attr clients.focus.floating toggle
 
 hc keybind $Mod-Shift-m set_attr clients.focus.minimized true
 hc keybind $Mod-Control-m        jumpto last-minimized
@@ -161,21 +160,34 @@ hc keybind $Mod-Shift-Tab   cycle_all -1
 hc keybind $Mod-c           cycle
 hc keybind $Mod-i           jumpto urgent
 
+# theme
 hc attr theme.tiling.reset 1
 hc attr theme.floating.reset 1
 
-# borders
-hc attr theme.border_width          2
-hc attr theme.outer_width           40
-hc attr theme.active.outer_color    '#d17288'
-hc attr theme.normal.outer_color    '#bc667a'
+# frame
+hc set always_show_frame 0
 
-# settings
-hc set window_gap           20
-hc set frame_border_width   0
-hc set frame_bg_transparent on
-hc set frame_gap            0
-hc set focus_follows_mouse  1
+
+# real talk, I'm not very sure how frames work
+# hence this might be very random
+hc set frame_border_normal_color '#222222'
+hc set frame_border_width 0
+
+hc set frame_bg_normal_color '#202020'
+hc set frame_bg_active_color '#131313'
+hc set frame_bg_transparent 1
+
+hc set frame_transparent_width 0
+hc set frame_gap 12
+
+hc set window_gap           40
+
+hc attr theme.active.color '#202020'
+hc attr theme.normal.color '#202020'
+hc attr theme.urgent.color '#303030'
+
+hc attr theme.border_width 10
+
 
 # rules
 hc unrule -F
@@ -184,6 +196,7 @@ hc rule focus=on # normally focus new clients
 hc rule floatplacement=smart
 
 
+hc set focus_follows_mouse  1
 hc set focus_crosses_monitor_boundaries 1
 hc set swap_monitors_to_get_tag=off
 
@@ -198,9 +211,3 @@ hc set tree_style '╾│ ├└╼─┐'
 
 hc unlock
 
-# panel=~/.config/herbstluftwm/panel.sh
-# [ -x "$panel" ] || panel=/etc/xdg/herbstluftwm/panel.sh
-# for monitor in $(hc list_monitors | cut -d: -f1) ; do
-#     # start it on each monitor
-#     "$panel" "$monitor" &
-# done

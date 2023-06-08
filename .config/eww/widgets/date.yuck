@@ -1,9 +1,0 @@
-(defwidget date []
-    (box :class "date"
-      :orientation "h"
-      :space-evenly false
-      :spacing 0
-
-      (separator)
-      (icon :character "" :text dt :onclick "")
-    ))

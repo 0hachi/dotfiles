@@ -3,6 +3,10 @@
 # this script is meant to be run after a minimal
 # x server installation as done by archinstall.
 
+# it only installs the fundamental programs, as
+# keeping track of every single change made to my 
+# system is fundamentally impossible/a waste of time
+
 _log() { printf '%b\033[1m[setup]\033[0m %s%b\n' "$2" "$1" '\033[0m' >&2; }
 
 error() {
@@ -22,7 +26,7 @@ installpkg() {
 
 	for package in "$@"; do
 		if [ "$package_manager" = "paru" ]; then
-			paru --noconfirm --needed -S "$package" >/dev/null 2>&1
+			paru --noconfirm --needed --nosudoloop -S "$package" >/dev/null 2>&1
 		else
 			sudo pacman --noconfirm --needed -S "$package" >/dev/null 2>&1
 		fi
@@ -61,31 +65,38 @@ success "paru successfully installed"
 # install needed packages
 ## apps
 debug "installing user apps"
-installpkg "neovim" "alacritty" "pavucontrol" "nitrogen" "gpick" "bitwarden"
+installpkg "neovim" "alacritty" "pavucontrol" "bitwarden"
 
 ## fonts
 debug "installing fonts"
-installpkg "bdf-tewi-git" "wqy-bitmapfont" "noto-fonts-emoji-apple" # others are in .local/share/fonts
+installpkg "wqy-bitmapfont" # spectrum's berry
+installpkg "noto-fonts-emoji-apple" "noto-fonts-cjk" "noto-fonts-main" 
+# others are in .local/share/fonts
 
 ## cli utils
 debug "installing cli utils"
-installpkg "exa" "bat" "ripgrep" "devour" "nsxiv" "stow" "shotgun" "xclip"
+installpkg "exa" "bat" "ripgrep" "devour" "stow" "shotgun" "xclip"
 
 ## various non-hard dependencies
 debug "installing dependencies"
-installpkg "wmctrl" "pywal" "man-db" "inotify-tools"
+installpkg "wmctrl" "man-db" "inotify-tools"
 
 ## system
 debug "installing system apps"
-installpkg "xorg-server" "xorg-xinit" "xorg-xauth" "fish" "herbstluftwm" "eww" "paru" "ly"
+installpkg "xorg-server" "xorg-xinit" "xorg-xauth" "xorg-xsetroot" "xorg-xrandr"
+installpkg "fish" "herbstluftwm" "lemonbar-xft-git" "paru" "ly"
 
 ## forks that require building
-debug "installing suckless"
-git clone https://github.com/0hachi/suckless.git >/dev/null 2>&1
+# i have a lot of forks to add such as,
+# nsxiv, sxcs, etc. come back to this 
+# when i set up my forks repo better
 
-success "dmenu installed"
-(cd suckless/dmenu && sudo make install) >/dev/null 2>&1
-rm -rf ./suckless >/dev/null 2>&1
+# debug "installing suckless"
+# git clone https://github.com/0hachi/suckless.git >/dev/null 2>&1
+
+# success "dmenu installed"
+# (cd suckless/dmenu && sudo make install) >/dev/null 2>&1
+# rm -rf ./suckless >/dev/null 2>&1
 
 # post-install
 
@@ -93,7 +104,6 @@ debug "enabling display manager service"
 sudo systemctl enable ly.service >/dev/null 2>&1
 
 stow .
-
 
 sudo chsh -s /usr/bin/fish
 fish

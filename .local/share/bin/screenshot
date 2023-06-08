@@ -1,0 +1,33 @@
+#! /usr/bin/env bash
+
+# captures a screenshot using
+# flameshot, then copies it to
+# your clipboard.
+
+# uses `flameshot`, `file`, `xclip`,
+#      `notify-send`
+
+tmp_file=$(mktemp -t XXXXXXXXXX.png)
+notify() {
+  local message=$1
+  rm "$tmp_file"
+ 
+  notify-send "error" -a "flameshot" -u critical -t 3000 "$message" && exit 1
+}
+
+
+if ! flameshot gui -r > "$tmp_file"; then
+  notify "couldn't open flameshot or pipe image"
+fi
+
+if [[ $(file --mime-type -b "$tmp_file") != "image/png" ]]; then
+  notify "unknown filetype"
+fi
+
+if ! xclip -selection clipboard -t image/png -i "$tmp_file"; then
+  notify "couldn't copy to clipboard"
+fi
+
+notify-send -i "$tmp_file" "flameshot"
+rm "$tmp_file"
+

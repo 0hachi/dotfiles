@@ -1,0 +1,9 @@
+#! /usr/bin/env bash
+
+# views a specified 
+# media file
+
+# uses `nsxiv`, `mpv`
+# TODO!
+
+nsxiv "$@"

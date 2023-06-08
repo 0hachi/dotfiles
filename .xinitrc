@@ -33,6 +33,6 @@ if [ -d /etc/X11/xinit/xinitrc.d ] ; then
  unset f
 fi
 
-# Prefer login manager
+# prefer login manager.
 exec herbstluftwm --locked
 

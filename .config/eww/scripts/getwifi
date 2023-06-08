@@ -1,3 +1,0 @@
-#! /usr/bin/env sh
-
-nmcli -t -f NAME c show --active

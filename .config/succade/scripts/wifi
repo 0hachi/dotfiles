@@ -1,0 +1,3 @@
+#! /usr/bin/env bash
+
+nmcli -t -f NAME c show --active | head -n1

@@ -1,0 +1,32 @@
+#! /usr/bin/env bash
+
+# a simple system information tool.
+# depends on `bc` and `wmctrl`
+
+. /etc/os-release
+
+sh="${SHELL##*/}"
+wm="$(wmctrl -m | awk -F' ' '/Name/{print $2}')"
+up="$(echo $(awk '{print $1}' /proc/uptime) / 3600 | bc)"
+pm="$(pacman -Qq | wc -l)"
+at="$(uname -n)"
+me="$(whoami)"
+
+c0='[0m'
+c1='[31m'
+c2='[32m'
+c3='[33m'
+c4='[34m'
+c5='[35m'
+c6='[36m'
+
+cat <<-EOF
+
+${c1}@      ${c1}...    ${at}${c0}
+${c2}me     ${c2}...    ${me}${c0}
+${c3}sh     ${c3}...    ${sh}${c0}
+${c4}wm     ${c4}...    ${wm}${c0}
+${c5}up     ${c5}...    ${up}h${c0}
+${c6}pm     ${c6}...    ${pm}${c0}
+
+EOF

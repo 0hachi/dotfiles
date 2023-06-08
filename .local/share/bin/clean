@@ -1,0 +1,11 @@
+#! /usr/bin/env bash
+
+# cleans up space by deleting
+# unnecessary stuff.
+
+sudo pacman -Scc
+sudo pacman -Rns $(pacman -Qtdq)
+
+rm -rf ~/.cache/*
+sudo journalctl --vacuum-size=50M
+

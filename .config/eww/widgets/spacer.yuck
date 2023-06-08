@@ -1,3 +1,0 @@
-(defwidget spacer []
-  (box :class "spacer"
-  :orientation "h"))

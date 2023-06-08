@@ -1,0 +1,78 @@
+[right]
+name = "right_bar"
+height = 32
+
+blocks = "workspaces_right | title | wifi volume ram date time"
+force = false
+
+command = lemonbar -o -1
+
+width = 1920
+
+foreground = "#ffffff"
+background = "#202020"
+font="spectrum berry"
+
+[left]
+name = "left_bar"
+height = 32
+
+blocks = "workspaces_left | title | wifi volume ram date time"
+force = false
+
+command = lemonbar -o -1
+
+width = 1920
+left = 1920
+
+foreground = "#ffffff"
+background = "#202020"
+font="spectrum berry"
+
+[workspaces_right]
+command = "~/.config/succade/scripts/workspaces 0"
+raw = true
+
+margin-left = 8
+interval = 0.1
+
+[workspaces_left]
+command = "~/.config/succade/scripts/workspaces 1"
+raw = true
+
+margin-left = 8
+interval = 0.1
+
+[default]
+margin = 8
+padding-left = 1
+
+[title]
+command = "~/.config/succade/scripts/title"
+interval = 0.1
+
+[date]
+command = "~/.config/succade/scripts/date"
+interval = 60
+
+[time]
+command = "~/.config/succade/scripts/time"
+interval = 60
+margin-right = 16
+
+[ram]
+command = "~/.config/succade/scripts/ram"
+interval = 1
+
+[volume]
+command = "~/.config/succade/scripts/volume"
+scroll-up = pactl -- set-sink-volume 0 +1%
+scroll-down = pactl -- set-sink-volume 0 -1%
+mouse-left = pavucontrol
+
+interval = 0.1
+
+[wifi]
+command = "~/.config/succade/scripts/wifi"
+
+interval = 60

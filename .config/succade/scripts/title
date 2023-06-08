@@ -1,0 +1,10 @@
+#! /usr/bin/env bash
+
+window_name=$(xdotool getwindowfocus getwindowname)
+window_manager=$(xprop -root -notype _NET_WM_NAME | awk -F '"' '{print $2}')
+
+if [ "$window_name" = "$window_manager" ]; then
+  echo "~"
+else
+  echo "$window_name"
+fi
