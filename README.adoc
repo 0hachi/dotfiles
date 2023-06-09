@@ -1,0 +1,14 @@
+== 📦 dotfiles
+
+dotfiles for my arch system
+
+== 📑 instructions
+
+[source,sh]
+----
+./setup
+----
+
+== 📝 todo
+
+* screenies

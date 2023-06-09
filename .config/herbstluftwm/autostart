@@ -6,6 +6,7 @@ hc() {
 
 hc emit_hook reload
 
+hc set default_frame_layout grid
 hc substitute ALGO settings.default_frame_layout \
     foreach T tags.by-name. \
     sprintf ATTR '%c.tiling.root.algorithm' T \

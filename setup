@@ -7,6 +7,10 @@
 # keeping track of every single change made to my 
 # system is fundamentally impossible/a waste of time
 
+tail -n +2 "$0" | head -n 8 | sed 's/^#[[:space:]]*//'
+read -p "continue?"
+clear
+
 _log() { printf '%b\033[1m[setup]\033[0m %s%b\n' "$2" "$1" '\033[0m' >&2; }
 
 error() {
@@ -15,6 +19,7 @@ error() {
 }
 debug() { _log "$1" '\033[36m'; }
 success() { _log "$1" '\033[32m'; }
+
 
 installpkg() {
 	# use `paru` if found.
