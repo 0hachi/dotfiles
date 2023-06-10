@@ -1,9 +1,24 @@
 #! /usr/bin/env bash
 
-# views a specified 
-# media file
-
+# views a specified media file
 # uses `nsxiv`, `mpv`
-# TODO!
 
-nsxiv "$@"
+if [ $# -eq 0 ]; then
+  echo "no media specified"
+  exit 1
+fi
+
+ext="${1##*.}"
+
+case "$ext" in
+  mp4|mkv|avi|mov|flv|wmv)
+    mpv "$@"
+    ;;
+  png|jpg|jpeg|gif)
+    nsxiv "$@"
+    ;;
+  *)
+    echo "$ext not supported"
+    exit 1
+    ;;
+esac
