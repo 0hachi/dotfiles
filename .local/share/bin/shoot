@@ -1,0 +1,60 @@
+#! /usr/bin/env perl
+
+# uses `slop`, `maim`, 
+#      `ffmpeg`, `xclip`,
+#      `libx264`, `libvpx`
+
+use strict;
+use warnings;
+
+use Getopt::Long;
+use File::Basename;
+
+sub begins_with {
+    return substr($_[0], 0, length($_[1])) eq $_[1];
+}
+
+my $binary = basename($0);
+
+my $filename = '';
+my $filetype = 'png';
+
+my $is_help = 0;
+
+
+GetOptions(
+    'filename|f=s'  => \$filename,
+    'filetype|ft=s' => \$filetype,
+    
+    'help|h'        => \$is_help,
+);
+
+if ($is_help) {
+    print 'usage: $binary [--filename|-f=<filename>] [--filetype|-ft=<png/webm/gif/mpeg/mp4>]\n';
+    exit;
+}
+
+if ($filetype !~ /^(png|webm|gif|mpeg|mp4)$/) {
+    die 'invalid file type. supported file types are: png, webm, gif, mpeg, mp4\n';
+}
+
+if (!$filename) {
+    $filename = `mktemp -t XXXXXXXXXX`;
+    chomp $filename;
+}
+
+$filename .= '.' . $filetype;
+
+if ($filetype eq 'png') {
+    `maim -s $filename`;
+    `xclip -selection clipboard -t image/png -i $filename >/dev/null 2>&1`;
+
+    exit 0
+}
+
+if (begins_with $filename, "/tmp") {
+    die "recording a video without an output file is not supported.\nconsider adding a `-f` to your keybinding and copying manually.\n";
+}
+
+my $geometry = `slop -f "-video_size %wx%h -i :0.0+%x,%y"`;    
+`ffmpeg -framerate 30 -f x11grab $geometry $filename`;

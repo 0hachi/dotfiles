@@ -33,7 +33,7 @@ hc keybind $Mod-Shift-Return spawn "alacritty" --class "alacritty-float"
 hc keybind $Mod-d spawn "dmenu_run_apps"
 hc keybind $Mod-e spawn "dmenu_emoji_menu"
 
-hc keybind Print spawn "$HOME/.local/share/bin/screenshot"
+hc keybind Print spawn "$HOME/.local/share/bin/shoot"
 
 # moving focus
 hc keybind $Mod-Left  focus left
