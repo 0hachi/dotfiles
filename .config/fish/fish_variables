@@ -2,6 +2,17 @@
 # VERSION: 3.0
 SETUVAR --export ABBR_TIPS_PROMPT:\x5cn\U0001f4a1\x20\x5ce\x5b1m\x7b\x7b\x20\x2eabbr\x20\x7d\x7d\x5ce\x5b0m\x20\x3d\x3e\x20\x7b\x7b\x20\x2ecmd\x20\x7d\x7d
 SETUVAR --export ABBR_TIPS_REGEXES:\x28\x5e\x28\x5cw\x2b\x5cs\x2b\x29\x2b\x28\x2d\x7b1\x2c2\x7d\x29\x5cw\x2b\x29\x28\x5cs\x5cS\x2b\x29\x1e\x28\x5e\x28\x5cs\x3f\x28\x5cw\x2d\x3f\x29\x2b\x29\x7b3\x7d\x29\x2e\x2a\x1e\x28\x5e\x28\x5cs\x3f\x28\x5cw\x2d\x3f\x29\x2b\x29\x7b2\x7d\x29\x2e\x2a\x1e\x28\x5e\x28\x5cs\x3f\x28\x5cw\x2d\x3f\x29\x2b\x29\x7b1\x7d\x29\x2e\x2a
+SETUVAR --export BROWSER:librefox
+SETUVAR --export CARGO_HOME:/home/whore/\x2elocal/share/cargo
+SETUVAR --export EDITOR:nvim
+SETUVAR --export GNUPGHOME:/home/whore/\x2elocal/share/gnupg
+SETUVAR --export RUSTUP_HOME:/home/whore/\x2elocal/share/rustup
+SETUVAR --export TERMINAL:alacritty
+SETUVAR --export XDG_CACHE_HOME:/home/whore/\x2ecache
+SETUVAR --export XDG_CONFIG_HOME:/home/whore/\x2econfig
+SETUVAR --export XDG_DATA_HOME:/home/whore/\x2elocal/share
+SETUVAR --export XDG_STATE_HOME:/home/whore/\x2elocal/state
+SETUVAR --export XINITRC:/home/whore/\x2econfig/X11/xinitrc
 SETUVAR --export __ABBR_TIPS_KEYS:a__c\x1ea__cat\x1ea__df\x1ea__du\x1ea__free\x1ea__grep\x1ea__list_wifi\x1ea__ls\x1ea__lsa\x1ea__mkdir\x1ea__mv\x1ea__ping\x1ea__rm\x1ea__wget\x1ea__list_wifi
 SETUVAR --export __ABBR_TIPS_VALUES:clear\x1ebat\x1edf\x20\x2dh\x1edu\x20\x2dh\x1efree\x20\x2dm\x1erg\x20\x2d\x2dcolor\x20always\x1enmcii\x20dev\x20wifi\x20rescan\x20\x26\x26\x20nmcli\x20dev\x20wifi\x20list\x1eexa\x20\x2dl\x20\x2d\x2dicons\x20\x2d\x2dcolour\x20always\x20\x2d\x2dgroup\x2ddirectories\x2dfirst\x1eexa\x20\x2dla\x20\x2d\x2dicons\x20\x2d\x2dcolour\x20always\x20\x2d\x2dgroup\x2ddirectories\x2dfirst\x1emkdir\x20\x2dpv\x1emv\x20\x2di\x1eping\x20\x2dc\x205\x1erm\x20\x2di\x1ewget\x20\x2dc\x1e
 SETUVAR __fish_initialized:3400
@@ -39,5 +50,5 @@ SETUVAR fish_pager_color_description:B3A06D\x1eyellow\x1e\x2di
 SETUVAR fish_pager_color_prefix:normal\x1e\x2d\x2dbold\x1e\x2d\x2dunderline
 SETUVAR fish_pager_color_progress:brwhite\x1e\x2d\x2dbackground\x3dcyan
 SETUVAR fish_pager_color_selected_background:\x2dr
-SETUVAR fisher_path:/home/whore/\x2econfig/fish/fisher
+SETUVAR --export fisher_path:/home/whore/\x2econfig/fish/fisher
 SETUVAR pisces_pairs:\x28\x2c\x29\x1e\x5b\x2c\x5d\x1e\x7b\x2c\x7d\x1e\x22\x2c\x22\x1e\x27\x2c\x27
