@@ -1,8 +1,7 @@
 #! /usr/bin/env perl
 
 # uses `slop`, `maim`, 
-#      `ffmpeg`, `xclip`,
-#      `libx264`, `libvpx`
+#      `xclip`, `curl`
 
 use strict;
 use warnings;
@@ -10,32 +9,32 @@ use warnings;
 use Getopt::Long;
 use File::Basename;
 
-sub begins_with {
-    return substr($_[0], 0, length($_[1])) eq $_[1];
-}
-
 my $binary = basename($0);
 
-my $filename = '';
-my $filetype = 'png';
-
-my $is_help = 0;
-
-
 GetOptions(
-    'filename|f=s'  => \$filename,
-    'filetype|ft=s' => \$filetype,
-    
-    'help|h'        => \$is_help,
+    'filename|f=s' => \my $filename,
+    'hours|h=i'    => \my $hours,
+
+    'upload|u'     => \my $is_upload,
+    'help|h'       => \my $is_help,
 );
 
-if ($is_help) {
-    print 'usage: $binary [--filename|-f=<filename>] [--filetype|-ft=<png/webm/gif/mpeg/mp4>]\n';
-    exit;
+if (!$is_upload) {
+    $is_upload = 1;
 }
 
-if ($filetype !~ /^(png|webm|gif|mpeg|mp4)$/) {
-    die 'invalid file type. supported file types are: png, webm, gif, mpeg, mp4\n';
+if (!$hours) {
+    $hours = 24;
+}
+
+sub screenshot {
+    `maim -s $filename`;
+    `xclip -selection clipboard -t image/png -i $filename >/dev/null 2>&1`;
+}
+
+if ($is_help) {
+    print "usage: $binary [--filename|-f=<filename>]\n";
+    exit;
 }
 
 if (!$filename) {
@@ -43,18 +42,13 @@ if (!$filename) {
     chomp $filename;
 }
 
-$filename .= '.' . $filetype;
+$filename .= '.png';
 
-if ($filetype eq 'png') {
-    `maim -s $filename`;
-    `xclip -selection clipboard -t image/png -i $filename >/dev/null 2>&1`;
+screenshot();
 
-    exit 0
+if ($is_upload) {
+    my $url = `curl -s -F "file=\@$filename" -Fexpires=$hours -Fsecret= https://0x0.st`;
+    chomp $url;
+
+    `echo $url | xclip -selection clipboard`;
 }
-
-if (begins_with $filename, "/tmp") {
-    die "recording a video without an output file is not supported.\nconsider adding a `-f` to your keybinding and copying manually.\n";
-}
-
-my $geometry = `slop -f "-video_size %wx%h -i :0.0+%x,%y"`;    
-`ffmpeg -framerate 30 -f x11grab $geometry $filename`;
