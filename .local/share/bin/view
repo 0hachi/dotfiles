@@ -12,10 +12,10 @@ ext="${1##*.}"
 
 case "$ext" in
   mp4|mkv|avi|mov|flv|wmv)
-    mpv "$@"
+    devour mpv "$@"
     ;;
   png|jpg|jpeg|gif)
-    nsxiv "$@"
+    devour nsxiv "$@"
     ;;
   *)
     echo "$ext not supported"
